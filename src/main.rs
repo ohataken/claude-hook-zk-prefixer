@@ -9,3 +9,9 @@ fn vault_path() -> PathBuf {
 
     PathBuf::from(vault_path)
 }
+
+fn note_name_format() -> String {
+    std::env::args()
+        .nth(1)
+        .unwrap_or_else(|| "%Y%m%d%H%M".to_string())
+}
