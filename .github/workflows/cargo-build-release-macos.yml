@@ -1,0 +1,29 @@
+name: cargo-build-release-macos
+
+on:
+  workflow_dispatch:
+
+jobs:
+  build:
+    runs-on: macos-latest
+    steps:
+      - uses: actions/checkout@v5
+
+      - uses: dtolnay/rust-toolchain@stable
+        with:
+          targets: aarch64-apple-darwin
+
+      - name: Build release (aarch64)
+        run: cargo build --release --target aarch64-apple-darwin
+
+      - name: Package (aarch64)
+        run: tar -czf claude-hook-zk-prefixer-aarch64-apple-darwin.tar.gz -C target/aarch64-apple-darwin/release claude-hook-zk-prefixer
+
+      - name: SHA256 (aarch64)
+        run: shasum -a 256 claude-hook-zk-prefixer-aarch64-apple-darwin.tar.gz
+
+      - name: Upload artifact (aarch64)
+        uses: actions/upload-artifact@v6
+        with:
+          name: claude-hook-zk-prefixer-aarch64-apple-darwin
+          path: claude-hook-zk-prefixer-aarch64-apple-darwin.tar.gz
