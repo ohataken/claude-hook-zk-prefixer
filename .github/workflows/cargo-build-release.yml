@@ -1,0 +1,34 @@
+name: cargo-build-release
+
+on:
+  push:
+    branches:
+      - main
+  pull_request:
+    branches:
+      - main
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v5
+
+      - uses: dtolnay/rust-toolchain@stable
+        with:
+          targets: x86_64-unknown-linux-gnu
+
+      - name: Build release (x86_64)
+        run: cargo build --release --target x86_64-unknown-linux-gnu
+
+      - name: Package (x86_64)
+        run: tar -czf claude-hook-zk-prefixer-x86_64-unknown-linux-gnu.tar.gz -C target/x86_64-unknown-linux-gnu/release claude-hook-zk-prefixer
+
+      - name: SHA256 (x86_64)
+        run: shasum -a 256 claude-hook-zk-prefixer-x86_64-unknown-linux-gnu.tar.gz
+
+      - name: Upload artifact (x86_64)
+        uses: actions/upload-artifact@v6
+        with:
+          name: claude-hook-zk-prefixer-x86_64-unknown-linux-gnu
+          path: claude-hook-zk-prefixer-x86_64-unknown-linux-gnu.tar.gz
