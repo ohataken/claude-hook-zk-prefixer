@@ -70,7 +70,6 @@ would overwrite the previous one.
   "hooks": {
     "SessionStart": [
       {
-        "matcher": "startup",
         "hooks": [
           {
             "type": "command",
