@@ -81,7 +81,3 @@ would overwrite the previous one.
   }
 }
 ```
-
-`SessionStart` also fires on `resume`, `clear` and `compact`. The `startup`
-matcher keeps it to fresh sessions only, so resuming a session does not add
-another note.
