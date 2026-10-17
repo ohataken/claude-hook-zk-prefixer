@@ -27,9 +27,13 @@ impl SessionStart {
 
 fn main() {
     let vault_path = vault_path();
+    let hook_event = hook_event();
     let note_name_format = note_name_format();
 
-    let frontmatter = read_payload::<SessionStart>().frontmatter();
+    let frontmatter = match hook_event.as_str() {
+        "session_start" => read_payload::<SessionStart>().frontmatter(),
+        _ => panic!("unknown hook event: {hook_event}"),
+    };
     let content = format!("---\n{}---\n", frontmatter);
 
     let file_name = format!("{}.md", Local::now().format(&note_name_format));
@@ -52,8 +56,12 @@ fn vault_path() -> PathBuf {
     PathBuf::from(vault_path)
 }
 
+fn hook_event() -> String {
+    std::env::args().nth(1).expect("hook event is not given")
+}
+
 fn note_name_format() -> String {
     std::env::args()
-        .nth(1)
+        .nth(2)
         .unwrap_or_else(|| "%Y%m%d%H%M".to_string())
 }

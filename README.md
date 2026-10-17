@@ -19,12 +19,12 @@ brew install claude-hook-zk-prefixer
 ## usage
 
 ```sh
-OBSIDIAN_VAULT_PATH=/path/to/vault claude-hook-zk-prefixer '%Y-%m-%dT%H%M%S'
+OBSIDIAN_VAULT_PATH=/path/to/vault claude-hook-zk-prefixer session_start '%Y-%m-%dT%H%M%S'
 ```
 
-stdin is parsed as a `SessionStart` hook payload and its fields are written as
-YAML frontmatter to `<vault>/<formatted time>.md` at the vault top level, so
-Obsidian shows them as note properties.
+stdin is parsed as the payload of the given hook event and its fields are
+written as YAML frontmatter to `<vault>/<formatted time>.md` at the vault top
+level, so Obsidian shows them as note properties.
 
 ```markdown
 ---
@@ -48,6 +48,7 @@ Any other field in the payload is left out.
 
 | argument | description |
 |---|---|
+| hook event | the hook event the payload comes from. only `session_start` for now. required |
 | format | note name format. defaults to `%Y%m%d%H%M` |
 
 The format is [chrono](https://docs.rs/chrono/latest/chrono/format/strftime/index.html)
@@ -73,7 +74,7 @@ would overwrite the previous one.
         "hooks": [
           {
             "type": "command",
-            "command": "OBSIDIAN_VAULT_PATH=/path/to/vault claude-hook-zk-prefixer '%Y-%m-%dT%H%M%S'"
+            "command": "OBSIDIAN_VAULT_PATH=/path/to/vault claude-hook-zk-prefixer session_start '%Y-%m-%dT%H%M%S'"
           }
         ]
       }
