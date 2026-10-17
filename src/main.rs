@@ -25,6 +25,28 @@ impl SessionStart {
     }
 }
 
+#[derive(Deserialize)]
+struct SessionEnd {
+    session_id: String,
+    transcript_path: String,
+    cwd: String,
+    hook_event_name: String,
+    reason: String,
+}
+
+impl SessionEnd {
+    fn frontmatter(&self) -> String {
+        format!(
+            "session_id: \"[[{}]]\"\ntranscript_path: {}\ncwd: {}\nhook_event_name: {}\nreason: {}\n",
+            self.session_id,
+            quote(&self.transcript_path),
+            quote(&self.cwd),
+            self.hook_event_name,
+            self.reason,
+        )
+    }
+}
+
 fn main() {
     let vault_path = vault_path();
     let hook_event = hook_event();
@@ -32,6 +54,7 @@ fn main() {
 
     let frontmatter = match hook_event.as_str() {
         "session_start" => read_payload::<SessionStart>().frontmatter(),
+        "session_end" => read_payload::<SessionEnd>().frontmatter(),
         _ => panic!("unknown hook event: {hook_event}"),
     };
     let content = format!("---\n{}---\n", frontmatter);
