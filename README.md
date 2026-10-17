@@ -70,7 +70,6 @@ would overwrite the previous one.
   "hooks": {
     "SessionStart": [
       {
-        "matcher": "startup",
         "hooks": [
           {
             "type": "command",
@@ -82,7 +81,3 @@ would overwrite the previous one.
   }
 }
 ```
-
-`SessionStart` also fires on `resume`, `clear` and `compact`. The `startup`
-matcher keeps it to fresh sessions only, so resuming a session does not add
-another note.
