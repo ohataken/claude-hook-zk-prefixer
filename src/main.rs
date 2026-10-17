@@ -52,6 +52,10 @@ fn vault_path() -> PathBuf {
     PathBuf::from(vault_path)
 }
 
+fn hook_event() -> String {
+    std::env::args().nth(1).expect("hook event is not given")
+}
+
 fn note_name_format() -> String {
     std::env::args()
         .nth(2)
