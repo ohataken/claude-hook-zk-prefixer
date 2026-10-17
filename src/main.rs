@@ -1,6 +1,6 @@
 use chrono::Local;
 use serde::Deserialize;
-use serde_json::Value;
+use serde::de::DeserializeOwned;
 use std::path::PathBuf;
 
 #[derive(Deserialize)]
@@ -29,15 +29,17 @@ fn main() {
     let vault_path = vault_path();
     let note_name_format = note_name_format();
 
-    let payload: Value =
-        serde_json::from_reader(std::io::stdin()).expect("failed to parse JSON from stdin");
-    let frontmatter = serde_norway::to_string(&payload).expect("failed to format YAML");
+    let frontmatter = read_payload::<SessionStart>().frontmatter();
     let content = format!("---\n{}---\n", frontmatter);
 
     let file_name = format!("{}.md", Local::now().format(&note_name_format));
     let note_path = vault_path.join(file_name);
 
     std::fs::write(&note_path, content).expect("failed to write note");
+}
+
+fn read_payload<T: DeserializeOwned>() -> T {
+    serde_json::from_reader(std::io::stdin()).expect("failed to parse JSON from stdin")
 }
 
 fn quote(value: &str) -> String {
