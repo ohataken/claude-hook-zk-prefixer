@@ -8,12 +8,13 @@ fn main() {
 
     let payload: Value =
         serde_json::from_reader(std::io::stdin()).expect("failed to parse JSON from stdin");
-    let content = serde_json::to_string_pretty(&payload).expect("failed to format JSON");
+    let frontmatter = serde_norway::to_string(&payload).expect("failed to format YAML");
+    let content = format!("---\n{}---\n", frontmatter);
 
     let file_name = format!("{}.md", Local::now().format(&note_name_format));
     let note_path = vault_path.join(file_name);
 
-    std::fs::write(&note_path, content + "\n").expect("failed to write note");
+    std::fs::write(&note_path, content).expect("failed to write note");
 }
 
 fn vault_path() -> PathBuf {
