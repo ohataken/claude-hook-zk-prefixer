@@ -27,9 +27,13 @@ impl SessionStart {
 
 fn main() {
     let vault_path = vault_path();
+    let hook_event = hook_event();
     let note_name_format = note_name_format();
 
-    let frontmatter = read_payload::<SessionStart>().frontmatter();
+    let frontmatter = match hook_event.as_str() {
+        "session_start" => read_payload::<SessionStart>().frontmatter(),
+        _ => panic!("unknown hook event: {hook_event}"),
+    };
     let content = format!("---\n{}---\n", frontmatter);
 
     let file_name = format!("{}.md", Local::now().format(&note_name_format));
