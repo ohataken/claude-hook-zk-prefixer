@@ -36,7 +36,8 @@ source: startup
 ---
 ```
 
-Any other field in the payload is left out.
+`session_end` writes `reason` in place of `source`. Any other field in the
+payload is left out.
 
 `session_id` is written as a wikilink, so the note links to `<session_id>.md`
 anywhere in the vault — the note
@@ -54,7 +55,7 @@ link stays unresolved until such a note exists.
 
 | argument | description |
 |---|---|
-| hook event | the hook event the payload comes from. only `session_start` for now. required |
+| hook event | `session_start` or `session_end`, the hook event the payload comes from. required |
 | format | note name format. defaults to `%Y%m%d%H%M` |
 
 The format is [chrono](https://docs.rs/chrono/latest/chrono/format/strftime/index.html)
@@ -81,6 +82,16 @@ would overwrite the previous one.
           {
             "type": "command",
             "command": "OBSIDIAN_VAULT_PATH=/path/to/vault claude-hook-zk-prefixer session_start '%Y-%m-%dT%H%M%S'"
+          }
+        ]
+      }
+    ],
+    "SessionEnd": [
+      {
+        "hooks": [
+          {
+            "type": "command",
+            "command": "OBSIDIAN_VAULT_PATH=/path/to/vault claude-hook-zk-prefixer session_end '%Y-%m-%dT%H%M%S'"
           }
         ]
       }
