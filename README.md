@@ -22,8 +22,18 @@ brew install claude-hook-zk-prefixer
 OBSIDIAN_VAULT_PATH=/path/to/vault claude-hook-zk-prefixer '%Y-%m-%dT%H%M%S'
 ```
 
-stdin is parsed as JSON and written back pretty printed to
-`<vault>/<formatted time>.md` at the vault top level.
+stdin is parsed as JSON and written as YAML frontmatter to
+`<vault>/<formatted time>.md` at the vault top level, so Obsidian shows the
+payload as note properties.
+
+```markdown
+---
+cwd: /path/to/project
+hook_event_name: SessionStart
+session_id: 491fe83a-d410-4d20-a532-4dcb0b3bbd4e
+source: startup
+---
+```
 
 ### environment variables
 
