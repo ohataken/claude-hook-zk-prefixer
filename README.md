@@ -65,7 +65,7 @@ would overwrite the previous one.
 ```json
 {
   "hooks": {
-    "SessionEnd": [
+    "SessionStart": [
       {
         "matcher": "startup",
         "hooks": [
