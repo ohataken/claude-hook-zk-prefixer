@@ -47,6 +47,28 @@ impl SessionEnd {
     }
 }
 
+#[derive(Deserialize)]
+struct UserPromptSubmit {
+    session_id: String,
+    transcript_path: String,
+    cwd: String,
+    hook_event_name: String,
+    prompt: String,
+}
+
+impl UserPromptSubmit {
+    fn content(&self) -> String {
+        format!(
+            "---\nsession_id: \"[[{}]]\"\ntranscript_path: {}\ncwd: {}\nhook_event_name: {}\n---\n\n{}\n",
+            self.session_id,
+            quote(&self.transcript_path),
+            quote(&self.cwd),
+            self.hook_event_name,
+            self.prompt,
+        )
+    }
+}
+
 fn main() {
     let vault_path = vault_path();
     let hook_event = hook_event();
