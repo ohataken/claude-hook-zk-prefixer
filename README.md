@@ -53,6 +53,9 @@ hook_event_name: UserPromptSubmit
 the prompt as typed
 ```
 
+`stop` writes Claude's last response, `last_assistant_message`, as the note
+body in the same way.
+
 `session_id` is written as a wikilink, so the note links to `<session_id>.md`
 anywhere in the vault — the note
 [claude-hook-session-id-note](https://github.com/ohataken/claude-hook-session-id-note)
@@ -69,7 +72,7 @@ link stays unresolved until such a note exists.
 
 | argument | description |
 |---|---|
-| hook event | `session_start`, `session_end` or `user_prompt_submit`, the hook event the payload comes from. required |
+| hook event | `session_start`, `session_end`, `user_prompt_submit` or `stop`, the hook event the payload comes from. required |
 | format | note name format. defaults to `%Y%m%d%H%M` |
 
 The format is [chrono](https://docs.rs/chrono/latest/chrono/format/strftime/index.html)
@@ -85,8 +88,8 @@ has in its settings:
 A moment.js format passed as is produces a literal file name, so every note
 would overwrite the previous one.
 
-`user_prompt_submit` fires on every prompt, so a format without seconds makes
-notes written within the same minute overwrite each other.
+`user_prompt_submit` and `stop` fire on every turn, so a format without seconds
+makes notes written within the same minute overwrite each other.
 
 ### .claude/settings.json example
 
@@ -109,6 +112,16 @@ notes written within the same minute overwrite each other.
           {
             "type": "command",
             "command": "OBSIDIAN_VAULT_PATH=/path/to/vault claude-hook-zk-prefixer user_prompt_submit '%Y-%m-%dT%H%M%S'"
+          }
+        ]
+      }
+    ],
+    "Stop": [
+      {
+        "hooks": [
+          {
+            "type": "command",
+            "command": "OBSIDIAN_VAULT_PATH=/path/to/vault claude-hook-zk-prefixer stop '%Y-%m-%dT%H%M%S'"
           }
         ]
       }
