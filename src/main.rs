@@ -100,6 +100,7 @@ fn main() {
         "session_start" => read_payload::<SessionStart>().content(),
         "session_end" => read_payload::<SessionEnd>().content(),
         "user_prompt_submit" => read_payload::<UserPromptSubmit>().content(),
+        "stop" => read_payload::<Stop>().content(),
         _ => panic!("unknown hook event: {hook_event}"),
     };
 
