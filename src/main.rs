@@ -13,9 +13,9 @@ struct SessionStart {
 }
 
 impl SessionStart {
-    fn frontmatter(&self) -> String {
+    fn content(&self) -> String {
         format!(
-            "session_id: \"[[{}]]\"\ntranscript_path: {}\ncwd: {}\nhook_event_name: {}\nsource: {}\n",
+            "---\nsession_id: \"[[{}]]\"\ntranscript_path: {}\ncwd: {}\nhook_event_name: {}\nsource: {}\n---\n",
             self.session_id,
             quote(&self.transcript_path),
             quote(&self.cwd),
@@ -35,9 +35,9 @@ struct SessionEnd {
 }
 
 impl SessionEnd {
-    fn frontmatter(&self) -> String {
+    fn content(&self) -> String {
         format!(
-            "session_id: \"[[{}]]\"\ntranscript_path: {}\ncwd: {}\nhook_event_name: {}\nreason: {}\n",
+            "---\nsession_id: \"[[{}]]\"\ntranscript_path: {}\ncwd: {}\nhook_event_name: {}\nreason: {}\n---\n",
             self.session_id,
             quote(&self.transcript_path),
             quote(&self.cwd),
@@ -52,12 +52,11 @@ fn main() {
     let hook_event = hook_event();
     let note_name_format = note_name_format();
 
-    let frontmatter = match hook_event.as_str() {
-        "session_start" => read_payload::<SessionStart>().frontmatter(),
-        "session_end" => read_payload::<SessionEnd>().frontmatter(),
+    let content = match hook_event.as_str() {
+        "session_start" => read_payload::<SessionStart>().content(),
+        "session_end" => read_payload::<SessionEnd>().content(),
         _ => panic!("unknown hook event: {hook_event}"),
     };
-    let content = format!("---\n{}---\n", frontmatter);
 
     let file_name = format!("{}.md", Local::now().format(&note_name_format));
     let note_path = vault_path.join(file_name);
