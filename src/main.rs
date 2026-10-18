@@ -35,9 +35,9 @@ struct SessionEnd {
 }
 
 impl SessionEnd {
-    fn frontmatter(&self) -> String {
+    fn content(&self) -> String {
         format!(
-            "session_id: \"[[{}]]\"\ntranscript_path: {}\ncwd: {}\nhook_event_name: {}\nreason: {}\n",
+            "---\nsession_id: \"[[{}]]\"\ntranscript_path: {}\ncwd: {}\nhook_event_name: {}\nreason: {}\n---\n",
             self.session_id,
             quote(&self.transcript_path),
             quote(&self.cwd),
