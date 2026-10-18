@@ -1,11 +1,11 @@
 class ClaudeHookZkPrefixer < Formula
   desc "My little utility for Claude Code hooks"
   homepage "https://github.com/ohataken/claude-hook-zk-prefixer"
-  version "0.0.3"
+  version "0.0.4"
 
   on_arm do
     url "https://github.com/ohataken/claude-hook-zk-prefixer/releases/download/v#{version}/claude-hook-zk-prefixer-aarch64-apple-darwin.tar.gz"
-    sha256 "30c4acf86f3743f87e46b6904db550a2c0cfbcc1a6be674e1f8b18cd74ba9abf"
+    sha256 "7a7c3d39de949667d5ac86a8c733622862a3f551c45812d4de5cde16f1ed8054"
   end
 
   def install
