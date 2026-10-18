@@ -13,9 +13,9 @@ struct SessionStart {
 }
 
 impl SessionStart {
-    fn frontmatter(&self) -> String {
+    fn content(&self) -> String {
         format!(
-            "session_id: \"[[{}]]\"\ntranscript_path: {}\ncwd: {}\nhook_event_name: {}\nsource: {}\n",
+            "---\nsession_id: \"[[{}]]\"\ntranscript_path: {}\ncwd: {}\nhook_event_name: {}\nsource: {}\n---\n",
             self.session_id,
             quote(&self.transcript_path),
             quote(&self.cwd),
