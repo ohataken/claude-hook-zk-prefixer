@@ -81,7 +81,7 @@ struct Stop {
 impl Stop {
     fn content(&self) -> String {
         format!(
-            "---\nsession_id: \"[[{}]]\"\ntranscript_path: {}\ncwd: {}\nhook_event_name: {}\n---\n\n{}\n",
+            "---\nsession_id: {}\ntranscript_path: {}\ncwd: {}\nhook_event_name: {}\n---\n\n{}\n",
             self.session_id,
             quote(&self.transcript_path),
             quote(&self.cwd),
