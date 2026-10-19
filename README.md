@@ -28,7 +28,7 @@ level, so Obsidian shows them as note properties.
 
 ```markdown
 ---
-session_id: "[[491fe83a-d410-4d20-a532-4dcb0b3bbd4e]]"
+session_id: 491fe83a-d410-4d20-a532-4dcb0b3bbd4e
 transcript_path: "/path/to/transcript.jsonl"
 cwd: "/path/to/project"
 hook_event_name: SessionStart
@@ -44,7 +44,7 @@ the note body.
 
 ```markdown
 ---
-session_id: "[[491fe83a-d410-4d20-a532-4dcb0b3bbd4e]]"
+session_id: 491fe83a-d410-4d20-a532-4dcb0b3bbd4e
 transcript_path: "/path/to/transcript.jsonl"
 cwd: "/path/to/project"
 hook_event_name: UserPromptSubmit
@@ -55,12 +55,6 @@ the prompt as typed
 
 `stop` writes Claude's last response, `last_assistant_message`, as the note
 body in the same way.
-
-`session_id` is written as a wikilink, so the note links to `<session_id>.md`
-anywhere in the vault — the note
-[claude-hook-session-id-note](https://github.com/ohataken/claude-hook-session-id-note)
-creates. That note then lists every note of the session in its backlinks. The
-link stays unresolved until such a note exists.
 
 ### environment variables
 
