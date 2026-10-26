@@ -62,11 +62,12 @@ struct UserPromptSubmit {
 impl UserPromptSubmit {
     fn content(&self, now: &DateTime<Local>) -> String {
         format!(
-            "---\nsession_id: {}\ntranscript_path: {}\ncwd: {}\nhook_event_name: {}\ntimestamp: {}\n---\n\n{}\n",
+            "---\nsession_id: {}\ntranscript_path: {}\ncwd: {}\nhook_event_name: {}\nprompt_id: {}\ntimestamp: {}\n---\n\n{}\n",
             self.session_id,
             quote(&self.transcript_path),
             quote(&self.cwd),
             self.hook_event_name,
+            self.prompt_id,
             now.format("%Y-%m-%dT%H:%M:%S"),
             self.prompt,
         )
