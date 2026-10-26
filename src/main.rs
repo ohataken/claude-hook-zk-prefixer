@@ -92,6 +92,7 @@ impl Stop {
 }
 
 fn main() {
+    let now = Local::now();
     let vault_path = vault_path();
     let hook_event = hook_event();
     let note_name_format = note_name_format();
@@ -104,7 +105,7 @@ fn main() {
         _ => panic!("unknown hook event: {hook_event}"),
     };
 
-    let file_name = format!("{}.md", Local::now().format(&note_name_format));
+    let file_name = format!("{}.md", now.format(&note_name_format));
     let note_path = vault_path.join(file_name);
 
     std::fs::write(&note_path, content).expect("failed to write note");
