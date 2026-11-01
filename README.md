@@ -80,6 +80,7 @@ has in its settings:
 |---|---|
 | `YYYYMMDDHHmm` | `%Y%m%d%H%M` |
 | `YYYY-MM-DDTHHmmss` | `%Y-%m-%dT%H%M%S` |
+| `YYYY-MM-DDTHHmmssSSS` | `%Y-%m-%dT%H%M%S%3f` |
 | `YYYY-MM-DD` | `%Y-%m-%d` |
 
 A moment.js format passed as is produces a literal file name, so every note
