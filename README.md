@@ -40,8 +40,8 @@ timestamp: 2026-10-26T12:34:56
 `timestamp` is the time the hook ran. `session_end` writes `reason` in place of
 `source`. Any other field in the payload is left out.
 
-`user_prompt_submit` writes the common fields as frontmatter and the prompt as
-the note body.
+`user_prompt_submit` writes the common fields and `prompt_id` as frontmatter and
+the prompt as the note body.
 
 ```markdown
 ---
@@ -49,6 +49,7 @@ session_id: 491fe83a-d410-4d20-a532-4dcb0b3bbd4e
 transcript_path: "/path/to/transcript.jsonl"
 cwd: "/path/to/project"
 hook_event_name: UserPromptSubmit
+prompt_id: 0f4b8a3e-6c2d-4e1a-9b7f-2d5c8e1a3b6f
 timestamp: 2026-10-26T12:34:56
 ---
 
