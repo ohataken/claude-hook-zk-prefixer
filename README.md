@@ -19,7 +19,7 @@ brew install claude-hook-zk-prefixer
 ## usage
 
 ```sh
-OBSIDIAN_VAULT_PATH=/path/to/vault claude-hook-zk-prefixer session_start '%Y-%m-%dT%H%M%S'
+OBSIDIAN_VAULT_PATH=/path/to/vault claude-hook-zk-prefixer session_start '%Y-%m-%dT%H%M%S%3f'
 ```
 
 stdin is parsed as the payload of the given hook event and its fields are
