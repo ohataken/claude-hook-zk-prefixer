@@ -49,6 +49,7 @@ session_id: 491fe83a-d410-4d20-a532-4dcb0b3bbd4e
 transcript_path: "/path/to/transcript.jsonl"
 cwd: "/path/to/project"
 hook_event_name: UserPromptSubmit
+timestamp: 2026-10-26T12:34:56
 ---
 
 the prompt as typed
