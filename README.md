@@ -100,7 +100,7 @@ millisecond such as `%Y-%m-%dT%H%M%S%3f`.
         "hooks": [
           {
             "type": "command",
-            "command": "OBSIDIAN_VAULT_PATH=/path/to/vault claude-hook-zk-prefixer session_start '%Y-%m-%dT%H%M%S'"
+            "command": "OBSIDIAN_VAULT_PATH=/path/to/vault claude-hook-zk-prefixer session_start '%Y-%m-%dT%H%M%S%3f'"
           }
         ]
       }
@@ -110,7 +110,7 @@ millisecond such as `%Y-%m-%dT%H%M%S%3f`.
         "hooks": [
           {
             "type": "command",
-            "command": "OBSIDIAN_VAULT_PATH=/path/to/vault claude-hook-zk-prefixer user_prompt_submit '%Y-%m-%dT%H%M%S'"
+            "command": "OBSIDIAN_VAULT_PATH=/path/to/vault claude-hook-zk-prefixer user_prompt_submit '%Y-%m-%dT%H%M%S%3f'"
           }
         ]
       }
@@ -120,7 +120,7 @@ millisecond such as `%Y-%m-%dT%H%M%S%3f`.
         "hooks": [
           {
             "type": "command",
-            "command": "OBSIDIAN_VAULT_PATH=/path/to/vault claude-hook-zk-prefixer stop '%Y-%m-%dT%H%M%S'"
+            "command": "OBSIDIAN_VAULT_PATH=/path/to/vault claude-hook-zk-prefixer stop '%Y-%m-%dT%H%M%S%3f'"
           }
         ]
       }
@@ -130,7 +130,7 @@ millisecond such as `%Y-%m-%dT%H%M%S%3f`.
         "hooks": [
           {
             "type": "command",
-            "command": "OBSIDIAN_VAULT_PATH=/path/to/vault claude-hook-zk-prefixer session_end '%Y-%m-%dT%H%M%S'"
+            "command": "OBSIDIAN_VAULT_PATH=/path/to/vault claude-hook-zk-prefixer session_end '%Y-%m-%dT%H%M%S%3f'"
           }
         ]
       }
