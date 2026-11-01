@@ -86,8 +86,9 @@ has in its settings:
 A moment.js format passed as is produces a literal file name, so every note
 would overwrite the previous one.
 
-`user_prompt_submit` and `stop` fire on every turn, so a format without seconds
-makes notes written within the same minute overwrite each other.
+A note with the same name is overwritten. `user_prompt_submit` and `stop` fire
+on every turn and several sessions can run at once, so use a format down to the
+millisecond such as `%Y-%m-%dT%H%M%S%3f`.
 
 ### .claude/settings.json example
 
