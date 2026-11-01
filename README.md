@@ -33,11 +33,12 @@ transcript_path: "/path/to/transcript.jsonl"
 cwd: "/path/to/project"
 hook_event_name: SessionStart
 source: startup
+timestamp: 2026-10-26T12:34:56
 ---
 ```
 
-`session_end` writes `reason` in place of `source`. Any other field in the
-payload is left out.
+`timestamp` is the time the hook ran. `session_end` writes `reason` in place of
+`source`. Any other field in the payload is left out.
 
 `user_prompt_submit` writes the common fields as frontmatter and the prompt as
 the note body.
