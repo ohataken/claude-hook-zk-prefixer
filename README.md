@@ -19,7 +19,7 @@ brew install claude-hook-zk-prefixer
 ## usage
 
 ```sh
-OBSIDIAN_VAULT_PATH=/path/to/vault claude-hook-zk-prefixer session_start '%Y-%m-%dT%H%M%S'
+OBSIDIAN_VAULT_PATH=/path/to/vault claude-hook-zk-prefixer session_start '%Y-%m-%dT%H%M%S%3f'
 ```
 
 stdin is parsed as the payload of the given hook event and its fields are
@@ -80,13 +80,15 @@ has in its settings:
 |---|---|
 | `YYYYMMDDHHmm` | `%Y%m%d%H%M` |
 | `YYYY-MM-DDTHHmmss` | `%Y-%m-%dT%H%M%S` |
+| `YYYY-MM-DDTHHmmssSSS` | `%Y-%m-%dT%H%M%S%3f` |
 | `YYYY-MM-DD` | `%Y-%m-%d` |
 
 A moment.js format passed as is produces a literal file name, so every note
 would overwrite the previous one.
 
-`user_prompt_submit` and `stop` fire on every turn, so a format without seconds
-makes notes written within the same minute overwrite each other.
+A note with the same name is overwritten. `user_prompt_submit` and `stop` fire
+on every turn and several sessions can run at once, so use a format down to the
+millisecond such as `%Y-%m-%dT%H%M%S%3f`.
 
 ### .claude/settings.json example
 
@@ -98,7 +100,7 @@ makes notes written within the same minute overwrite each other.
         "hooks": [
           {
             "type": "command",
-            "command": "OBSIDIAN_VAULT_PATH=/path/to/vault claude-hook-zk-prefixer session_start '%Y-%m-%dT%H%M%S'"
+            "command": "OBSIDIAN_VAULT_PATH=/path/to/vault claude-hook-zk-prefixer session_start '%Y-%m-%dT%H%M%S%3f'"
           }
         ]
       }
@@ -108,7 +110,7 @@ makes notes written within the same minute overwrite each other.
         "hooks": [
           {
             "type": "command",
-            "command": "OBSIDIAN_VAULT_PATH=/path/to/vault claude-hook-zk-prefixer user_prompt_submit '%Y-%m-%dT%H%M%S'"
+            "command": "OBSIDIAN_VAULT_PATH=/path/to/vault claude-hook-zk-prefixer user_prompt_submit '%Y-%m-%dT%H%M%S%3f'"
           }
         ]
       }
@@ -118,7 +120,7 @@ makes notes written within the same minute overwrite each other.
         "hooks": [
           {
             "type": "command",
-            "command": "OBSIDIAN_VAULT_PATH=/path/to/vault claude-hook-zk-prefixer stop '%Y-%m-%dT%H%M%S'"
+            "command": "OBSIDIAN_VAULT_PATH=/path/to/vault claude-hook-zk-prefixer stop '%Y-%m-%dT%H%M%S%3f'"
           }
         ]
       }
@@ -128,7 +130,7 @@ makes notes written within the same minute overwrite each other.
         "hooks": [
           {
             "type": "command",
-            "command": "OBSIDIAN_VAULT_PATH=/path/to/vault claude-hook-zk-prefixer session_end '%Y-%m-%dT%H%M%S'"
+            "command": "OBSIDIAN_VAULT_PATH=/path/to/vault claude-hook-zk-prefixer session_end '%Y-%m-%dT%H%M%S%3f'"
           }
         ]
       }
