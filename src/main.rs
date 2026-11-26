@@ -62,12 +62,13 @@ struct UserPromptSubmit {
 }
 
 impl UserPromptSubmit {
-    fn content(&self, now: &DateTime<Local>) -> String {
+    fn content(&self, now: &DateTime<Local>, claude_config_dir: &str) -> String {
         format!(
-            "---\nsession_id: {}\ntranscript_path: {}\ncwd: {}\nhook_event_name: {}\nprompt_id: {}\ntimestamp: {}\n---\n\n{}\n",
+            "---\nsession_id: {}\ntranscript_path: {}\ncwd: {}\nclaude_config_dir: {}\nhook_event_name: {}\nprompt_id: {}\ntimestamp: {}\n---\n\n{}\n",
             self.session_id,
             quote(&self.transcript_path),
             quote(&self.cwd),
+            quote(claude_config_dir),
             self.hook_event_name,
             self.prompt_id,
             now.format("%Y-%m-%dT%H:%M:%S"),
@@ -111,7 +112,9 @@ fn main() {
     let content = match hook_event.as_str() {
         "session_start" => read_payload::<SessionStart>().content(&now, &claude_config_dir),
         "session_end" => read_payload::<SessionEnd>().content(&now, &claude_config_dir),
-        "user_prompt_submit" => read_payload::<UserPromptSubmit>().content(&now),
+        "user_prompt_submit" => {
+            read_payload::<UserPromptSubmit>().content(&now, &claude_config_dir)
+        }
         "stop" => read_payload::<Stop>().content(&now),
         _ => panic!("unknown hook event: {hook_event}"),
     };
