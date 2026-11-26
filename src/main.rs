@@ -104,6 +104,7 @@ fn main() {
     let vault_path = vault_path();
     let hook_event = hook_event();
     let note_name_format = note_name_format();
+    let claude_config_dir = claude_config_dir();
 
     let content = match hook_event.as_str() {
         "session_start" => read_payload::<SessionStart>().content(&now),
@@ -131,6 +132,10 @@ fn vault_path() -> PathBuf {
     let vault_path = std::env::var("OBSIDIAN_VAULT_PATH").expect("OBSIDIAN_VAULT_PATH is not set");
 
     PathBuf::from(vault_path)
+}
+
+fn claude_config_dir() -> String {
+    std::env::var("CLAUDE_CONFIG_DIR").unwrap_or_default()
 }
 
 fn hook_event() -> String {
