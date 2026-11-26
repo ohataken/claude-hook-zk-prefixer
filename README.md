@@ -38,8 +38,10 @@ timestamp: 2026-10-26T12:34:56
 ---
 ```
 
-`timestamp` is the time the hook ran. `session_end` writes `reason` in place of
-`source`. Any other field in the payload is left out.
+`claude_config_dir` is the value of the `CLAUDE_CONFIG_DIR` environment
+variable, an empty string if unset. `timestamp` is the time the hook ran.
+`session_end` writes `reason` in place of `source`. Any other field in the
+payload is left out.
 
 `user_prompt_submit` writes the common fields and `prompt_id` as frontmatter and
 the prompt as the note body.
@@ -66,6 +68,7 @@ body in the same way.
 | variable | description |
 |---|---|
 | `OBSIDIAN_VAULT_PATH` | path to the Obsidian vault. required |
+| `CLAUDE_CONFIG_DIR` | written as `claude_config_dir` in the frontmatter. optional |
 
 ### arguments
 
