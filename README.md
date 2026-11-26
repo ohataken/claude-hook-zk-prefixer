@@ -31,6 +31,7 @@ level, so Obsidian shows them as note properties.
 session_id: 491fe83a-d410-4d20-a532-4dcb0b3bbd4e
 transcript_path: "/path/to/transcript.jsonl"
 cwd: "/path/to/project"
+claude_config_dir: "/path/to/.claude"
 hook_event_name: SessionStart
 source: startup
 timestamp: 2026-10-26T12:34:56
@@ -48,6 +49,7 @@ the prompt as the note body.
 session_id: 491fe83a-d410-4d20-a532-4dcb0b3bbd4e
 transcript_path: "/path/to/transcript.jsonl"
 cwd: "/path/to/project"
+claude_config_dir: "/path/to/.claude"
 hook_event_name: UserPromptSubmit
 prompt_id: 0f4b8a3e-6c2d-4e1a-9b7f-2d5c8e1a3b6f
 timestamp: 2026-10-26T12:34:56
